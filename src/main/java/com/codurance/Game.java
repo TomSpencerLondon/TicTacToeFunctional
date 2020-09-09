@@ -7,22 +7,29 @@ import static com.codurance.Status.GAME_ON;
 public class Game {
 
   private final Status status;
-  private final Player nextUp;
+  private final Player lastPlayer;
 
   public Game() {
     this.status = GAME_ON;
-    this.nextUp = X;
+    this.lastPlayer = null;
   }
-  public Game(Status status, Player nextUp) {
+  public Game(Status status, Player lastPlayer) {
     this.status = status;
-    this.nextUp = nextUp;
+    this.lastPlayer = lastPlayer;
   }
 
   public GameState state() {
-    return new GameState(status, nextUp);
+    return new GameState(status, nextPlayer());
   }
 
   public Game play() {
-    return new Game(GAME_ON, O);
+    return new Game(GAME_ON, nextPlayer());
+  }
+
+  private Player nextPlayer(){
+    if (lastPlayer == null)
+      return X;
+    else
+      return lastPlayer == X ? O : X;
   }
 }
