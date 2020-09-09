@@ -1,5 +1,5 @@
 package com.codurance;
 
 public enum Player {
-  X
+  O, X
 }
