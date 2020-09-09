@@ -8,7 +8,7 @@ public class Board {
 
   private Set<Square> takenSquares;
 
-  public Board(Set<Square> squares) {
+  private Board(Set<Square> squares) {
     this.takenSquares = squares;
   }
 
