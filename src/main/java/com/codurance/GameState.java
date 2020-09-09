@@ -5,12 +5,17 @@ import static org.apache.commons.lang.builder.HashCodeBuilder.reflectionHashCode
 
 public class GameState {
 
-  private final Status gameOn;
+  private final Status status;
   private final Player nextPlayer;
 
-  public GameState(Status gameOn, Player nextPlayer) {
-    this.gameOn = gameOn;
+  public GameState(Status status, Player nextPlayer) {
+    this.status = status;
     this.nextPlayer = nextPlayer;
+  }
+
+  @Override
+  public String toString() {
+    return "Status: " + status +  ", next up: " + nextPlayer;
   }
 
   @Override
