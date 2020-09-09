@@ -8,12 +8,12 @@ public class Board {
 
   private Set<Square> takenSquares;
 
-  private Board(Set<Square> squares) {
-    this.takenSquares = squares;
-  }
-
   public Board() {
     this.takenSquares = Collections.emptySet();
+  }
+
+  private Board(Set<Square> squares) {
+    this.takenSquares = squares;
   }
 
   public boolean alreadyTaken(Square square) {
