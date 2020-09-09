@@ -1,5 +1,6 @@
 package com.codurance;
 
+import static com.codurance.Player.O;
 import static com.codurance.Player.X;
 import static com.codurance.Status.GAME_ON;
 
@@ -22,6 +23,6 @@ public class Game {
   }
 
   public Game play() {
-    return new Game(Status.GAME_ON, Player.O);
+    return new Game(GAME_ON, O);
   }
 }
