@@ -22,16 +22,13 @@ public class GameShould {
 
   @Test
   void wait_for_O_to_play_after_X() {
-    Game game = new Game();
-    game = game.play(TOP_LEFT);
+    Game game = play(TOP_LEFT);
     assertThat(game.state()).isEqualTo(new GameState(GAME_ON, O));
   }
 
   @Test
   void alternate_the_players() {
-    Game game = new Game();
-    game = game.play(TOP_LEFT);
-    game = game.play(TOP_MIDDLE);
+    Game game = play(TOP_LEFT, TOP_MIDDLE);
     assertThat(game.state()).isEqualTo(new GameState(GAME_ON, X));
   }
 
