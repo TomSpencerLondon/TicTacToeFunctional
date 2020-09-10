@@ -32,17 +32,23 @@ public class Game {
   }
 
   public GameState state() {
-    if (status == DRAW || status == X_HAS_WON || status == O_HAS_WON)
+    if (gameIsOver())
       return new GameState(status);
     else
       return new GameState(status, nextPlayer());
   }
 
   public Game play(Square square) {
+    if (gameIsOver())
+      return this;
     if (board.alreadyTaken(square))
       return new Game(SQUARE_ALREADY_PLAYED, lastPlayer, board);
     else
       return new Game(GAME_ON, nextPlayer(), board.take(square, nextPlayer()));
+  }
+
+  private boolean gameIsOver() {
+    return status == DRAW || status == X_HAS_WON || status == O_HAS_WON;
   }
 
   private Player nextPlayer(){
