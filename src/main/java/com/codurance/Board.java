@@ -3,6 +3,7 @@ package com.codurance;
 import static com.codurance.Square.BOTTOM_LEFT;
 import static com.codurance.Square.CENTRE_LEFT;
 import static com.codurance.Square.TOP_LEFT;
+import static java.util.stream.Stream.of;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -36,7 +37,7 @@ public class Board {
   }
 
   public boolean hasWinningCombination() {
-    Stream<Square> winnningCombination = Stream.of(TOP_LEFT, CENTRE_LEFT, BOTTOM_LEFT);
-    return winnningCombination.allMatch(square -> takenSquares.contains(square));
+    Stream<Square> winnningCombination = of(TOP_LEFT, CENTRE_LEFT, BOTTOM_LEFT);
+    return winnningCombination.allMatch(takenSquares::contains);
   }
 }
