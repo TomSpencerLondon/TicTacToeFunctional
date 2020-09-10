@@ -14,7 +14,9 @@ import static com.codurance.Square.TOP_MIDDLE;
 import static com.codurance.Square.TOP_RIGHT;
 import static com.codurance.Status.DRAW;
 import static com.codurance.Status.GAME_ON;
+import static com.codurance.Status.O_HAS_WON;
 import static com.codurance.Status.SQUARE_ALREADY_PLAYED;
+import static com.codurance.Status.X_HAS_WON;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Arrays;
@@ -82,7 +84,20 @@ public class GameShould {
   void recognise_a_win(Square s1, Square s2, Square s3, Square s4, Square s5) {
     Game game = play(s1, s2, s3, s4, s5);
 
-    assertThat(game.state()).isEqualTo(new GameState(Status.X_HAS_WON));
+    assertThat(game.state()).isEqualTo(new GameState(X_HAS_WON));
+  }
+
+  @Test
+  void recognise_a_win_for_O() {
+    Game game = play(
+        TOP_RIGHT,
+        TOP_LEFT,
+        TOP_MIDDLE,
+        CENTRE_LEFT,
+        CENTRE_MIDDLE,
+        BOTTOM_LEFT
+    );
+    assertThat(game.state()).isEqualTo(new GameState(O_HAS_WON));
   }
 
   private Game play(Square... squares) {
