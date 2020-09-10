@@ -1,8 +1,11 @@
 package com.codurance;
 
 import static com.codurance.Square.BOTTOM_LEFT;
+import static com.codurance.Square.BOTTOM_MIDDLE;
 import static com.codurance.Square.CENTRE_LEFT;
+import static com.codurance.Square.CENTRE_MIDDLE;
 import static com.codurance.Square.TOP_LEFT;
+import static com.codurance.Square.TOP_MIDDLE;
 import static java.util.stream.Stream.of;
 
 import java.util.Collections;
@@ -37,7 +40,12 @@ public class Board {
   }
 
   public boolean hasWinningCombination() {
-    Stream<Square> winnningCombination = of(TOP_LEFT, CENTRE_LEFT, BOTTOM_LEFT);
-    return winnningCombination.allMatch(takenSquares::contains);
+    Stream<Stream<Square>> winnningCombinations = of(
+        of(TOP_LEFT, CENTRE_LEFT, BOTTOM_LEFT),
+        of(TOP_MIDDLE, CENTRE_MIDDLE, BOTTOM_MIDDLE)
+    );
+    return winnningCombinations.anyMatch(winningCombination ->
+            winningCombination.allMatch(takenSquares::contains)
+        );
   }
 }
