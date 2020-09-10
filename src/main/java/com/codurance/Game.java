@@ -2,6 +2,7 @@ package com.codurance;
 
 import static com.codurance.Player.O;
 import static com.codurance.Player.X;
+import static com.codurance.Status.DRAW;
 import static com.codurance.Status.GAME_ON;
 import static com.codurance.Status.SQUARE_ALREADY_PLAYED;
 
@@ -18,13 +19,19 @@ public class Game {
     this.board = new Board();
   }
   public Game(Status status, Player lastPlayer, Board board) {
-    this.status = status;
     this.lastPlayer = lastPlayer;
     this.board = board;
+    if (board.isFull())
+      this.status = DRAW;
+    else
+      this.status = status;
   }
 
   public GameState state() {
-    return new GameState(status, nextPlayer());
+    if (status == DRAW)
+      return new GameState(status);
+    else
+      return new GameState(status, nextPlayer());
   }
 
   public Game play(Square square) {

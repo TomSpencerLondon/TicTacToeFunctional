@@ -13,6 +13,11 @@ public class GameState {
     this.nextPlayer = nextPlayer;
   }
 
+  public GameState(Status status) {
+    this.status = status;
+    this.nextPlayer = null;
+  }
+
   @Override
   public String toString() {
     return "Status: " + status +  ", next up: " + nextPlayer;
