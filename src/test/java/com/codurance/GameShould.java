@@ -19,6 +19,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Arrays;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
+import org.junit.jupiter.params.provider.CsvSource;
 
 public class GameShould {
 
@@ -65,8 +68,18 @@ public class GameShould {
     assertThat(game.state()).isEqualTo(new GameState(DRAW));
   }
 
-  private Game play(Square...squares) {
+  @ParameterizedTest
+  @CsvSource({
+      "TOP_LEFT,TOP_MIDDLE,CENTRE_LEFT,CENTRE_MIDDLE,BOTTOM_LEFT"
+  })
+  void recognise_a_win(Square s1, Square s2, Square s3, Square s4, Square s5) {
+    Game game = play(s1, s2, s3, s4, s5);
+
+    assertThat(game.state()).isEqualTo(new GameState(Status.X_HAS_WON));
+  }
+
+  private Game play(Square... squares) {
     return Arrays.stream(squares)
-            .reduce(new Game(), Game::play, (a, b) -> null);
+        .reduce(new Game(), Game::play, (a, b) -> null);
   }
 }

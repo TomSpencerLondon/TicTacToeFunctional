@@ -5,6 +5,7 @@ import static com.codurance.Player.X;
 import static com.codurance.Status.DRAW;
 import static com.codurance.Status.GAME_ON;
 import static com.codurance.Status.SQUARE_ALREADY_PLAYED;
+import static com.codurance.Status.X_HAS_WON;
 
 
 public class Game {
@@ -23,12 +24,14 @@ public class Game {
     this.board = board;
     if (board.isFull())
       this.status = DRAW;
+    else if (board.hasWinningCombination())
+      this.status = X_HAS_WON;
     else
       this.status = status;
   }
 
   public GameState state() {
-    if (status == DRAW)
+    if (status == DRAW || status == X_HAS_WON)
       return new GameState(status);
     else
       return new GameState(status, nextPlayer());

@@ -1,8 +1,13 @@
 package com.codurance;
 
+import static com.codurance.Square.BOTTOM_LEFT;
+import static com.codurance.Square.CENTRE_LEFT;
+import static com.codurance.Square.TOP_LEFT;
+
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Stream;
 
 public class Board {
 
@@ -28,5 +33,10 @@ public class Board {
 
   public boolean isFull() {
     return takenSquares.size() == 9;
+  }
+
+  public boolean hasWinningCombination() {
+    Stream<Square> winnningCombination = Stream.of(TOP_LEFT, CENTRE_LEFT, BOTTOM_LEFT);
+    return winnningCombination.allMatch(square -> takenSquares.contains(square));
   }
 }
