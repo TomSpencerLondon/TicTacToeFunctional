@@ -23,10 +23,10 @@ public class Game {
   public Game(Status status, Player lastPlayer, Board board) {
     this.lastPlayer = lastPlayer;
     this.board = board;
-    if (board.isFull())
-      this.status = DRAW;
-    else if (board.hasWinningCombination(lastPlayer))
+    if (board.hasWinningCombination(lastPlayer))
       this.status = lastPlayer == X ? X_HAS_WON : O_HAS_WON;
+    else if (board.isFull())
+      this.status = DRAW;
     else
       this.status = status;
   }
