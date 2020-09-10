@@ -20,7 +20,9 @@ public class GameState {
 
   @Override
   public String toString() {
-    return "Status: " + status +  ", next up: " + nextPlayer;
+    String next = nextPlayer == null ? "" : ", next up: " + nextPlayer;
+
+    return "Status: " + status + next;
   }
 
   @Override
