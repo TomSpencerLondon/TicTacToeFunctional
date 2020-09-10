@@ -2,10 +2,13 @@ package com.codurance;
 
 import static com.codurance.Square.BOTTOM_LEFT;
 import static com.codurance.Square.BOTTOM_MIDDLE;
+import static com.codurance.Square.BOTTOM_RIGHT;
 import static com.codurance.Square.CENTRE_LEFT;
 import static com.codurance.Square.CENTRE_MIDDLE;
+import static com.codurance.Square.CENTRE_RIGHT;
 import static com.codurance.Square.TOP_LEFT;
 import static com.codurance.Square.TOP_MIDDLE;
+import static com.codurance.Square.TOP_RIGHT;
 import static java.util.stream.Stream.of;
 
 import java.util.Collections;
@@ -42,7 +45,13 @@ public class Board {
   public boolean hasWinningCombination() {
     Stream<Stream<Square>> winnningCombinations = of(
         of(TOP_LEFT, CENTRE_LEFT, BOTTOM_LEFT),
-        of(TOP_MIDDLE, CENTRE_MIDDLE, BOTTOM_MIDDLE)
+        of(TOP_MIDDLE, CENTRE_MIDDLE, BOTTOM_MIDDLE),
+        of(TOP_RIGHT, CENTRE_RIGHT, BOTTOM_RIGHT),
+        of(TOP_LEFT,TOP_MIDDLE,TOP_RIGHT),
+        of(CENTRE_LEFT,CENTRE_MIDDLE,CENTRE_RIGHT),
+        of(BOTTOM_LEFT,BOTTOM_MIDDLE,BOTTOM_RIGHT),
+        of(TOP_LEFT,CENTRE_MIDDLE,BOTTOM_RIGHT),
+        of(TOP_RIGHT,CENTRE_MIDDLE,BOTTOM_LEFT)
     );
     return winnningCombinations.anyMatch(winningCombination ->
             winningCombination.allMatch(takenSquares::contains)
